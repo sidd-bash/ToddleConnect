@@ -1,0 +1,16 @@
+#add{
+    background: #09818d;
+    
+}
+/* #filter{
+    border
+} */
+#ChatsTab > div{
+    padding: 5px;
+    width: 2vw;
+    height: 2vw;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
+    
+}

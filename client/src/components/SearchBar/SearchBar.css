@@ -1,0 +1,12 @@
+input{
+    border:none;
+}
+.Input{
+    gap:1vw;
+}
+.SearchBar{
+    width:95vw;
+    background: #eee;
+    height:3rem;
+
+}
