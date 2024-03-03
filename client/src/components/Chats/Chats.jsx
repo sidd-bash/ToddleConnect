@@ -8,12 +8,12 @@ import "./Chats.css"
 export default function Chats() {
   return (
     <div className='col-4 border border-black'>
-        <div id="ChatsTab" className='d-flex align-items-center justify-content-between'>
-            <h2 className="justify-self-left">Chats</h2>
+        <div id="ChatsTab" className='d-flex align-items-center'>
+            <h2 className="">Chats</h2>
             <div id="filter">
               <Filter/>
             </div>
-            <div id="add">
+            <div id="add" className='justify-self-end'>
               <Plus/>
             </div>
         </div>
