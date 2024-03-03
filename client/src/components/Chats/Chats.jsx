@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from '../SearchBar/SearchBar'
+// import SearchBar from '../SearchBar/SearchBar'
 import Contact from '../Contact/Contact'
 import { Filter,Search } from 'react-bootstrap-icons'
 import { Plus } from 'react-bootstrap-icons'
