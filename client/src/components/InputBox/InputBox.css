@@ -1,0 +1,17 @@
+#inputBox{
+    margin-top: auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background:white;
+    
+}
+#buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#buttons > div > *{
+    margin-left:2vw;
+}
+#inputBox > *{
+    padding: 2vh;
+}

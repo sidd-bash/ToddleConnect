@@ -5,11 +5,16 @@ import App from './App';
 import "bootstrap/dist/css/bootstrap.min.css";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 import { CssBaseline } from "@mui/material";
-
+import { ChatProvider } from './context/chatContext';
+import { AuthProvider } from './context/authContext';
 root.render(
   <>
+  <AuthProvider>
+
     <CssBaseline/>
     <App />
+  </AuthProvider>
+  
   </>
 );
 

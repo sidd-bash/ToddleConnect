@@ -1,36 +1,40 @@
 import React from 'react'
 import "./NavBar.css"
 import {ChatSquareTextFill,Hash,Eye, PieChart, Gear} from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 // import Hash from 'react-bootstrap-icons';
 
 import { RiFlag2Line } from "react-icons/ri";
+// import { useNavigate } from 'react-router-dom';
 export default function NavBar() {
+  const navigate = useNavigate();
   return (
     <nav className='d-flex flex-column pt-5 bg-light'>
       <div>
         <ChatSquareTextFill/>
         Chats
       </div>
-      <div>
-        <Hash/>
-        Channels
+      <div className='text-secondary'>
+        <Hash className='fs-4'/>
+        <small>Channels</small>
       </div>
-      <div>
+      <div className='text-secondary'>
         <RiFlag2Line />
-        Flagged
+        <small>Flagged</small>
       </div>
-      <div>
+      <div className='text-secondary'>
         <Eye/>
-        Overview
+        <small>Overview</small>
       </div>
-      <div>
+      <div className='text-secondary'>
         <PieChart/>
-        Analytics
+        <small>Analytics</small>
+        
       </div>
-      <div>
+      <button className='text-secondary bg-light pt-3 pb-3 d-flex flex-column align-items-center border border-none'onClick={()=>navigate('/settings')}>
         <Gear/>
-        Settings
-      </div>
+        <small>Settings</small>
+      </button>
     </nav>
   )
 }

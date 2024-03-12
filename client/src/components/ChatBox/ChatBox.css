@@ -1,0 +1,22 @@
+#image img{
+    width: 3vw;
+    height: 3vw;
+    object-fit: cover;
+}
+#chatBox{
+    width: 70%;
+}
+/*
+#chatBoxTab{
+    background:violet
+} */
+#inputBox{
+    margin-top: auto;
+    /* background: red; */
+    
+}
+#input {
+    /* display: flex; */
+    /* justify-self: flex-end; Aligns children along the horizontal line in a row */
+    /* align-self: flex-end; Optional: Centers children along the vertical line in a column */
+   }

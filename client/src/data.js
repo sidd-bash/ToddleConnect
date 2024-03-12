@@ -10,7 +10,7 @@ const Person = [
                 time:"4:15"
             }
         ],
-        image: require("./images/person.jpeg")
+        // image: require("../images/person.jpeg")
 
     },
     {
@@ -24,7 +24,7 @@ const Person = [
                 time:"4:15"
             }
         ],
-        image: require("./images/person.jpeg")
+        // image: require("../images/person.jpeg")
 
     },
     {
@@ -39,7 +39,7 @@ const Person = [
                 date:"06/02/24"
             }
         ],
-        image: require("./images/person.jpeg")
+        // image: require("../images/person.jpeg")
 
     },
     {
@@ -54,7 +54,7 @@ const Person = [
                 date:"06/02/24"
             }
         ],
-        image: require("./images/person.jpeg")
+        // image: require("../images/person.jpeg")
 
     },
     {
@@ -69,7 +69,7 @@ const Person = [
                 date:"06/02/24"
             }
         ],
-        image: require("./images/person.jpeg")
+        // image: require("../images/person.jpeg")
 
     },
     {
@@ -84,7 +84,7 @@ const Person = [
                 date:"06/02/24"
             }
         ],
-        image: require("./images/person.jpeg")
+        // image: require("../images/person.jpeg")
 
     },
     {
@@ -99,7 +99,7 @@ const Person = [
                 date:"05/02/24"
             }
         ],
-        image: require("./images/person.jpeg")
+        // image: require("../images/person.jpeg")
 
     },
     
