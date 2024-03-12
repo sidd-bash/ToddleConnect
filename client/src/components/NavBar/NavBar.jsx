@@ -2,10 +2,8 @@ import React from 'react'
 import "./NavBar.css"
 import {ChatSquareTextFill,Hash,Eye, PieChart, Gear} from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
-// import Hash from 'react-bootstrap-icons';
-
 import { RiFlag2Line } from "react-icons/ri";
-// import { useNavigate } from 'react-router-dom';
+
 export default function NavBar() {
   const navigate = useNavigate();
   return (

@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useContext, useEffect } from 'react';
 import Contact from '../Contact/Contact';
 import { Filter, Search } from 'react-bootstrap-icons';
 import { Plus } from 'react-bootstrap-icons';
@@ -10,21 +9,14 @@ import { AuthContext } from '../../context/authContext.jsx';
 export default function Chats() {
   const {currentUser} = useContext(AuthContext)
   const { contacts,isLoading, error, setSelectedContact} = useContext(ChatContext);
-//  const [currentUser, setCurrentUser] = useState(null); 
  const handleContactSelect = (id) => {
-    // console.log("pressed: ", id);
     setSelectedContact(id);
  };
- 
+
  useEffect(()=>{
   console.log('this is the current user: ',currentUser)
-  // window.localStorage.setItem("currentUser", JSON.stringify(currentUser));
  },[currentUser])
  
-//  useEffect(()=>{
-//   console.log(JSON.parse(window.localStorage.getItem('currentUser')));
-//   setCurrentUser(JSON.parse(window.localStorage.getItem('currentUser')))
-//  },[])
  
  return (
     <div id="chats" className='border border-disabled'>
@@ -50,7 +42,6 @@ export default function Chats() {
             {contact.id !== currentUser.id && <Contact contact={contact} />}
           </button>
         )) : <p>No contacts found.</p>}
-        {/* {contacts[0] !== undefined ?contacts[0].first_name : null} */}
       </div>
     </div>
  );

@@ -17,7 +17,7 @@ export default function Message({message, details}) {
             
             <div className='m-1'>
 
-            {message.sender_id === currentUser.id ? currentUser.firstName : details.firstName}
+            {message.sender_id === currentUser.id ? currentUser.first_name : details.first_name}
             </div>
             <div className='m-1'>
 

@@ -1,41 +1,38 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import useLocalStorage from '../hooks/useLocalStorage';
-import {AuthContext} from './authContext';
+import { AuthContext } from './authContext';
 const ChatContext = createContext({
   selectedContact: null,
-  setSelectedContact: ()=>{},
+  setSelectedContact: () => { },
   contacts: [], // Initial contacts as an empty array
+  setContacts: () => { },
   isLoading: false,
   error: null,
-  users:[],
-  setUsers:()=>{}
+  users: [],
+  setUsers: () => { }
 });
 
 
 const ChatProvider = ({ children }) => {
-  const {currentUser} = useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext)
   const [selectedContact, setSelectedContact] = useState(null);
   const [contacts, setContacts] = useState([]);
- const [isLoading, setIsLoading] = useState(false);
- const [error, setError] = useState(null);
-  // const [currentUser, setCurrentUser] = useLocalStorage('currentUser',JSON.parse(window.localStorage.getItem('currentUser')))
-  const [users, setUsers] = useState([])
-  // useEffect(()=>{
-  //   console.log('heres the global current user',currentUser)
-  // },[currentUser])
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
- useEffect(() => {
+  const [users, setUsers] = useState([])
+
+
+  useEffect(() => {
     const fetchContacts = async () => {
       setIsLoading(true);
       setError(null);
 
       try {
-        // console.log(currentUser)
         const response = await axios.get(`http://localhost:3000/api/users/${currentUser.id}/contacts`);
         console.log(response.data);
         const data = response.data;
-        
+
         setContacts(data);
       } catch (error) {
         console.error('Error fetching contacts:', error);
@@ -45,18 +42,18 @@ const ChatProvider = ({ children }) => {
       }
     };
     fetchContacts();
- }, []);
- 
-  // Add functions to update state and expose them through context
+  }, [currentUser.id]);
+
   const handleContactSelect = (contactId) => setSelectedContact(contactId);
-  // const handleCurrentUser = (currentUser)=>setCurrentUser(currentUser)
-  const handleUsers = (users)=>setUsers(users)
+  const handleUsers = (users) => setUsers(users)
+  const handleContacts = (contacts) => setContacts(contacts)
   return (
     <ChatContext.Provider
       value={{
         selectedContact,
         setSelectedContact: handleContactSelect,
         contacts,
+        setContacts: handleContacts,
         isLoading,
         error,
         users,

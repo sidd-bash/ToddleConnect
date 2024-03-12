@@ -2,20 +2,10 @@ import React,{useState, useContext} from 'react'
 import { useNavigate } from "react-router-dom"
 import logo from "../../images/toddleLogo.png"
 import logoWhite from "../../images/toddleLogoWhite.jpg"
-import teacherLogo from "../../images/schoolLogo.jpg"
-import studentLogo from "../../images/studentLogo.jpg"
-import parentLogo from "../../images/parentLogo.jpg"
 import landing from "../../images/teacherLogin.png"
-import { GoArrowRight } from "react-icons/go";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import googleLogo from "../../images/googleLogo.jpeg";
-import microsoftLogo from "../../images/microsoftLogo.png";
-import cleverLogo from "../../images/cleverLogo.png";
-import { Row } from "react-bootstrap"
 import axios from 'axios';
-import { ChatContext } from '../../context/chatContext'
 import { AuthContext } from '../../context/authContext'
-// import './Landing.css'
 export default function TeacherRegister() {
     const navigate = useNavigate();
     const {setCurrentUser,currentUser} = useContext(AuthContext)
@@ -23,13 +13,12 @@ export default function TeacherRegister() {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const [details, setDetails] = useState({})
     const handleSubmit = (e) =>{
         console.log('current user:',currentUser)
         e.preventDefault();
         axios.post('http://localhost:3000/api/users',{
-            firstName,
-            lastName,
+            first_name:firstName,
+            last_name:lastName,
             email,
             password,
             post:"Teacher"

@@ -65,7 +65,7 @@ const verifyJWT = (req, res, next) => {
 app.get('/api/users/search/:keyword', async (req, res) => {
   const { keyword } = req.params;
   // Implement the SQL query to search for users by first name or last name
-  const result = await pool.query('SELECT * FROM users WHERE firstName ILIKE $1 OR lastName ILIKE $1', [`%${keyword}%`]);
+  const result = await pool.query('SELECT * FROM users WHERE first_name ILIKE $1 OR last_name ILIKE $1', [`%${keyword}%`]);
   res.json(result.rows);
 });
 
@@ -101,16 +101,17 @@ app.post('/api/messages', async (req, res) => {
   res.json(result.rows[0]); 
 });
 
+
  
 app.post('/api/users', async (req, res) => {
-  const { firstName, lastName, email, password, post } = req.body;
+  const { first_name, last_name, email, password, post } = req.body;
   
   // Validate user data (optional)
  
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
-    const result = await pool.query('INSERT INTO users (firstName, lastName, email, password, post) VALUES ($1, $2, $3, $4, $5) RETURNING *', [firstName, lastName, email, hashedPassword, post]);
+    const result = await pool.query('INSERT INTO users (first_name, last_name, email, password, post) VALUES ($1, $2, $3, $4, $5) RETURNING *', [first_name, last_name, email, hashedPassword, post]);
 
     // **Optional (Immediate JWT after registration):**
     const token = jwt.sign({ userId: result.rows[0].id }, secretKey, { expiresIn: '1m' }); // Short-lived token for immediate login
@@ -152,14 +153,14 @@ app.post('/api/login', async (req, res) => {
   app.put('/api/users/:id', async (req, res) => {
     // console.log('this happened')
     const { id } = req.params;
-    const { firstName, lastName, image } = req.body;
+    const { first_name, last_name, image } = req.body;
   
     // Validate user data (optional)
   
     try {
       const result = await pool.query(
-        'UPDATE users SET firstName = $1, lastName = $2, image = $3 WHERE id = $4 RETURNING *',
-        [firstName, lastName, image, id] // Pass image as well
+        'UPDATE users SET first_name = $1, last_name = $2, image = $3 WHERE id = $4 RETURNING *',
+        [first_name, last_name, image, id] // Pass image as well
       );
   
       if (result.rowCount > 0) {
@@ -170,7 +171,7 @@ app.post('/api/login', async (req, res) => {
     } catch (error) {
       console.error('Error editing user:', error);
       // Handle potential errors (e.g., database errors, invalid image format)
-      res.status(500).json({ message: 'Error editing user' });
+      res.status(500).json({ message: 'Error editing user' }); 
     }
   });
 

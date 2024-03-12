@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import "./Contact.css"
 export default function Contact({ contact }) {
     return (
@@ -7,10 +7,9 @@ export default function Contact({ contact }) {
             <img src={contact.image} alt="" width={50} />
             </div>
             <div className='d-flex flex-column mx-2'>
-                {contact.firstName + " " + contact.lastName}
+                {contact.first_name + " " + contact.last_name}
                 {contact.post && <small className='text-secondary'>{contact.post}</small>}
             </div>
-            {/* {contact.message && contact.message.length > 0 && <small id="time" className='text-secondary'>{contact.message[0].time}</small>} */}
         </div>
 
     )

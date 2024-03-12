@@ -4,11 +4,6 @@
     object-fit: cover;
 }
 
-/* #contact{
-    background: pink;
-    border:1px solid black
-} */
-
 #contact:hover{
     background: #ddd;
 }

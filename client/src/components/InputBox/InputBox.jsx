@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react'
+import React,{useState,useContext,useEffect, useMemo} from 'react'
 import "./InputBox.css"
 import { MdTextFields } from "react-icons/md";
 import { BsEmojiLaughing} from "react-icons/bs";
@@ -8,12 +8,28 @@ import { VscSend } from "react-icons/vsc";
 import axios from 'axios';
 import { ChatContext } from '../../context/chatContext';
 import { AuthContext } from '../../context/authContext';
+// import React, { , useState } from "react";
+import { io } from "socket.io-client";
 
-export default function InputBox({user}) {
+export default function InputBox({user, messages, setMessages}) {
     const [newMsg, setNewMsg] = useState('');
     const {currentUser} = useContext(AuthContext)
     const {selectedContact} = useContext(ChatContext);
+    const socket = useMemo(()=>io("http://localhost:3000"),[])
     
+    useEffect(()=>{
+      socket.on('connect',()=>{
+        socket.id = currentUser.id;
+        console.log('connected',socket.id);
+      })
+      socket.on('welcome',s=>{
+        console.log(s)
+      })
+      socket.on('message-recieved',data=>{
+        setMessages([...messages,data])
+
+      })
+    })
     const handleSubmit = (e)=>{
         e.preventDefault()
         console.log(newMsg,user)
@@ -24,6 +40,10 @@ export default function InputBox({user}) {
             })
             .then(response => {
               console.log('Response:', response.data);
+              setMessages([...messages,response.data])
+              socket.emit('message',response.data)
+              setNewMsg('')
+
             })
             .catch(error => {
               console.error('Error:', error.message);
@@ -58,3 +78,9 @@ export default function InputBox({user}) {
     </div>
   )
 }
+
+
+
+
+
+

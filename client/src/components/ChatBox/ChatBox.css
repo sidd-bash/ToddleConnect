@@ -5,6 +5,13 @@
 }
 #chatBox{
     width: 70%;
+    height: 90vh;
+    overflow-y: hidden;
+}
+#chatBoxMessages{
+    overflow-y: scroll;
+    height: 70vh;
+    scrollbar-width: none;
 }
 /*
 #chatBoxTab{
@@ -16,6 +23,8 @@
     
 }
 #input {
+    /* position: absolute; */
+    /* bottom: 5vh; */
     /* display: flex; */
     /* justify-self: flex-end; Aligns children along the horizontal line in a row */
     /* align-self: flex-end; Optional: Centers children along the vertical line in a column */
