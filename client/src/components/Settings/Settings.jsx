@@ -1,6 +1,5 @@
 import React,{useEffect,useState,useContext} from 'react'
 import axios from 'axios'
-import {ChatContext, ChatProvider} from '../../context/chatContext';
 import {Button} from 'react-bootstrap'
 import { AuthContext } from '../../context/authContext';
 import './Settings.css';
@@ -8,7 +7,6 @@ import { FiArrowLeftCircle } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 export default function Settings() {
   const {currentUser,setCurrentUser} = useContext(AuthContext)
-  // const [currentUser,setUser] = useState()
   const [firstName,setFirstName] = useState(currentUser.firstName)
   const [lastName,setLastName] = useState(currentUser.lastName)
   const [image,setImage] = useState(currentUser.image)
@@ -41,9 +39,7 @@ export default function Settings() {
       .then(setCurrentUser({...currentUser,firstName,lastName,image}))
       .catch(err=>console.log('server error:',err))
   }
-  useEffect(()=>{
-    handleImageChange();
-  },[imageValue])
+  useEffect(handleImageChange,[imageValue])
   return (
     
     <div className=' d-flex align-items-center justify-content-center col-12'>
@@ -51,7 +47,7 @@ export default function Settings() {
 <form onSubmit={handleSubmit} className='d-flex gap-4 mt-5 flex-column align-items-center rounded col-6 border border-disabled bg-light p-3'>
   <FiArrowLeftCircle className='fs-3' id='backButton' onClick={()=>navigate('/main')}/>
   <label htmlFor="profile-picture" className="edit-photo">
-    <img src={image} className="edit-photo-image rounded-circle profile-picture" alt="Profile picture" width={150} />
+    <img src={image} className="edit-photo-image rounded-circle profile-picture" alt="Profile" width={150} />
     <span className="edit-photo-text">Edit Photo</span>
   </label>
   <input type="file" id="profile-picture" accept="image/*" onChange={e => setImageValue(e.target.files[0])} style={{ display: 'none' }} />

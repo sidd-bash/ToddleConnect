@@ -1,4 +1,4 @@
-import React,{useContext,useEffect} from 'react'
+import React,{useContext} from 'react'
 // import { ChatContext } from '../../context/chatContext';
 import { AuthContext } from '../../context/authContext';
 export default function Message({message, details}) {
