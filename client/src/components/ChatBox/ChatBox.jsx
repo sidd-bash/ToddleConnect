@@ -5,6 +5,7 @@ import InputBox from '../InputBox/InputBox';
 import Message from '../Message/Message';
 import axios from 'axios';
 import { AuthContext } from '../../context/authContext';
+import toddleWallpaper from "../../images/toddleWallpaper.png"
 export default function ChatBox() {
   const {currentUser} = useContext(AuthContext)
   const { selectedContact, users} = useContext(ChatContext);
@@ -66,7 +67,9 @@ export default function ChatBox() {
             <InputBox user={currentUser} setMessages={setMessages} messages={messages}/>
           </div>
         </>
-      ) : <div>Messages are shown here</div>}
+      ) : <div >
+          <img src={toddleWallpaper} alt="" style={{position:"fixed",top:"40%",left:"55%"}} width={500}/>
+        </div>}
     </div>
   );
   

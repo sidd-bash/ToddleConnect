@@ -1,20 +1,36 @@
-import React from 'react'
+import React,{useState,useContext} from 'react'
 import {useNavigate} from "react-router-dom"
 import logo from "../../images/toddleLogo.png"
 import logoWhite from "../../images/toddleLogoWhite.jpg"
-import teacherLogo from "../../images/schoolLogo.jpg"
-import studentLogo from "../../images/studentLogo.jpg"
-import parentLogo from "../../images/parentLogo.jpg"
 import landing from "../../images/parentsLogin.png"
-import { GoArrowRight } from "react-icons/go";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import googleLogo from "../../images/googleLogo.jpeg";
 import microsoftLogo from "../../images/microsoftLogo.png";
-import cleverLogo from "../../images/cleverLogo.png";
-import {Row} from "react-bootstrap"
+import { AuthContext } from '../../context/authContext';
+import axios from 'axios'
 // import './Landing.css'
 export default function ParentLogin() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const {setCurrentUser} = useContext(AuthContext);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    axios.post('http://localhost:3000/api/login',{
+          email,
+          password
+      })
+      .then(response => {
+          // console.log('Response:', response.data);
+          // response.data.user.image = require('../../images/'+response.data.user.image);
+          setCurrentUser(response.data.user)
+          // window.localStorage.setItem('currentUser', JSON.stringify(response.data.user));
+          navigate('/main');
+        }) 
+        .catch(error => {
+          console.error('Error:', error.message);
+        });
+  }
   return (
     
     <div className='d-flex justify-content-center col-12'>
@@ -67,12 +83,14 @@ export default function ParentLogin() {
 
         
       </div>
-      <div>
+      <form onSubmit={handleSubmit} className='d-flex flex-column gap-2'>
         <p className='fw-bold'>Sign in with email/phone</p>
-        <input type="text" placeholder='Enter your email id or phone number' className='flex items-center empty:ml-0 text-label-2 text-textSubtle group-hover/btn:text-textDefault ml-2 border border-disabled p-2 rounded col-6' name='email' autoComplete='off'/>
-        <button className='mx-2 rounded border border-none text-secondary fw-bold p-2'>Next</button>
-      </div>
-      <small>Don't have an account? <a href="" style={{textDecoration:"none"}}>Create new</a></small>
+        <input type="text" placeholder='Enter your email id' className='flex items-center empty:ml-0 text-label-2 text-textSubtle group-hover/btn:text-textDefault ml-2 border border-disabled p-2 rounded col-6' name='email' autoComplete='off' value={email} onChange={(e)=>setEmail(e.target.value)}/>
+        <input type="text" placeholder='Password' className='flex items-center empty:ml-0 text-label-2 text-textSubtle group-hover/btn:text-textDefault ml-2 border border-disabled p-2 rounded col-6' name='password' autoComplete='off' value={password} onChange={(e)=>setPassword(e.target.value)}/>
+        <button type='submit' className='mx-2 col-2 rounded border border-none text-secondary fw-bold p-2'>Next</button>
+        
+      </form>
+      <small>Don't have an account? <a href="/parentRegister" style={{textDecoration:"none"}}>Create new</a></small>
       
         </div>
     </div>
