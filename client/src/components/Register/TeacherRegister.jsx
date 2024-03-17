@@ -6,7 +6,6 @@ import landing from "../../images/teacherLogin.png"
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import axios from 'axios';
 import { AuthContext } from '../../context/authContext'
-import useLocalStorage from '../../hooks/useLocalStorage'
 export default function TeacherRegister() {
     const navigate = useNavigate();
     const {setCurrentUser,currentUser,setAuthToken} = useContext(AuthContext)

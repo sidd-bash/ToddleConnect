@@ -8,6 +8,7 @@ import parentLogo from "../../images/parentLogo.jpg"
 import landing from "../../images/landingPhoto.png"
 import { GoArrowRight } from "react-icons/go";
 import './Landing.css'
+
 export default function Landing() {
     const navigate = useNavigate();
   return (
@@ -47,7 +48,7 @@ export default function Landing() {
         <GoArrowRight className='fs-4 text-secondary mx-4 justify-self-end'/>
       </button>
       <div className='m-4 mx-2'>
-        Here as a visitor? <a href="" style={{color:"black"}}>Sign-in here</a>
+        Here as a visitor? <a href="/" style={{color:"black"}}>Sign-in here</a>
       </div>
       <footer className='fw-light text-secondary mt-auto pt-auto mb-3'>
       <small>

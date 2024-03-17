@@ -5,7 +5,7 @@ import axios from 'axios';
 import { ChatContext } from '../../context/chatContext';
 import { AuthContext } from '../../context/authContext';
 export default function SearchBar() {
-  const {contacts, setContacts, selectedContact,setSelectedContact,setUsers} =useContext(ChatContext)
+  const {contacts, setContacts, setSelectedContact,setUsers} =useContext(ChatContext)
   const [search, setSearch] = useState('')
   const [results,setResults] = useState([])
   const [isActive,setIsActive] = useState(false)
@@ -39,10 +39,7 @@ export default function SearchBar() {
         setUsers(response.data.data.users)
       }
     )
-  },[search])
-  useEffect(()=>{ 
-    console.log('Selected Contact',selectedContact)
-  },[selectedContact])
+  },[search,authToken,setUsers])
   const handleContactSelect = (result) => {
     setIsSelecting(true);
     setSelectedContact(result.id);

@@ -48,7 +48,7 @@ const ChatProvider = ({ children }) => {
       }
     };
     fetchContacts();
-  }, [currentUser.id]);
+  }, [currentUser.id,authToken]);
 
   const handleContactSelect = (contactId) => setSelectedContact(contactId);
   const handleUsers = (users) => setUsers(users)

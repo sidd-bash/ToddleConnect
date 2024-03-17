@@ -10,7 +10,7 @@ export default function Message({message, details}) {
     <div className='bg-grey d-flex flex-column m-2' id={currentUser.id===message.sender_id ? "sent" : "recieved"}>
         <div className='d-flex' >
             <div id="image" className='rounded border border-disabled'>
-                {message.sender_id == currentUser.id ? <img src={currentUser.image} alt="" width={50} /> : <img src={details.image} alt="" width={50} /> }
+                {Number(message.sender_id) === Number(currentUser.id) ? <img src={currentUser.image} alt="" width={50} /> : <img src={details.image} alt="" width={50} /> }
             </div>
             <div>
 
@@ -19,7 +19,7 @@ export default function Message({message, details}) {
             
             <div className='m-1'>
 
-            {message.sender_id == currentUser.id ? currentUser.first_name : details.first_name}
+            {Number(message.sender_id) === Number(currentUser.id)  ? currentUser.first_name : details.first_name}
             </div>
             <div className='m-1'>
 

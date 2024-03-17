@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useContext} from 'react'
+import React,{useEffect,useState,useContext, useCallback} from 'react'
 import axios from 'axios'
 import {Button} from 'react-bootstrap'
 import { AuthContext } from '../../context/authContext';
@@ -12,7 +12,7 @@ export default function Settings() {
   const [image,setImage] = useState(currentUser.image)
   const [imageValue,setImageValue] = useState(null);
   const navigate = useNavigate();
-  const handleImageChange =()=>{
+  const handleImageChange = useCallback(()=>{
     
     
     console.log(imageValue)
@@ -26,7 +26,7 @@ export default function Settings() {
       setImage(res.data.secure_url)
     })
     .catch(err=>console.log(err))
-  }
+  },[imageValue])
   const handleSubmit = e=>{
       e.preventDefault();
       axios.post(`http://localhost:8000/graphql`,
@@ -64,7 +64,7 @@ export default function Settings() {
   useEffect(
     ()=>{
       if(imageValue) handleImageChange()
-    },[imageValue])
+    },[imageValue,handleImageChange])
   return (
     
     <div className=' d-flex align-items-center justify-content-center col-12'>

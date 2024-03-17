@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Contact from '../Contact/Contact';
 import { Filter, Search } from 'react-bootstrap-icons';
 import { Plus } from 'react-bootstrap-icons';
