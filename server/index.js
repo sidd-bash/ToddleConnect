@@ -8,8 +8,10 @@ import http from 'http';
 import path from 'path';
 // import { createServer } from "http";
 // import { gql } from 'apollo-server-express';
+import dotenv from 'dotenv'
 import typeDefs from './typedefs.js';
 import resolvers from './resolvers.js';
+dotenv.config()
 const app = express()
 const httpServer = http.createServer(app);
 const server = new ApolloServer({
@@ -21,7 +23,7 @@ async function startServer() {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true })); // Parses URL-encoded data
     
-    app.use(cors({ origin: 'http://localhost:3000' }));
+    app.use(cors({ origin: process.env.clientURL }));
     // app.use('/socket.io');
 
     app.use("/graphql", cors(), express.json(), expressMiddleware(server, {
@@ -43,7 +45,7 @@ async function startServer() {
 
 const io = new Server(httpServer,{
   cors:{
-    origin:"http://localhost:3000",
+    origin:process.env.clientURL,
     methods: ["GET", "POST"]
   }
 })
