@@ -23,7 +23,7 @@ export default function SearchBar() {
    };
   
   useEffect(()=>{
-    axios.post(`http://localhost:8000/graphql`,
+    axios.post(`https://toddle-connect.vercel.app/graphql`,
     {
       "query": `{ users(keyword: "${search}") { id first_name last_name email post image } }`
     },

@@ -16,7 +16,7 @@ export default function InputBox({user, messages, setMessages}) {
     const [newMsg, setNewMsg] = useState('');
     const {currentUser,authToken} = useContext(AuthContext)
     const {selectedContact} = useContext(ChatContext);
-    const socket = useMemo(()=>io("http://localhost:8000"),[])
+    const socket = useMemo(()=>io("https://toddle-connect.vercel.app"),[])
     const [argument,setArgument] = useState(0)
     const [showMenu,setShowMenu] = useState(false)
     const [language,setLanguage] = useState('English')
@@ -60,7 +60,7 @@ export default function InputBox({user, messages, setMessages}) {
     const handleSubmit = (e)=>{
         e.preventDefault()
         console.log(newMsg,user)
-            axios.post('http://localhost:8000/graphql',{
+            axios.post('https://toddle-connect.vercel.app/graphql',{
               "query": `mutation($sender_id: ID!, $receiver_id: ID!, $content: String!) {createMessage(sender_id: $sender_id, receiver_id: $receiver_id, content: $content) {sender_id receiver_id content timestamp}}`,
               "variables":{
                 "sender_id": currentUser.id,

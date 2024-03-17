@@ -29,7 +29,7 @@ const ChatProvider = ({ children }) => {
       setError(null);
 
       try {
-        axios.post(`http://localhost:8000/graphql`,
+        axios.post(`https://toddle-connect.vercel.app/graphql`,
           {
             "query": `{ contacts (userId: ${currentUser.id} ) { id first_name last_name email post image } }`,
           },

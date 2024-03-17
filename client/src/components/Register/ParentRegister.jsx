@@ -16,7 +16,7 @@ export default function ParentRegister() {
     const handleSubmit = (e) =>{
         console.log('current user:',currentUser)
         e.preventDefault();
-        axios.post('http://localhost:8000/graphql',{
+        axios.post('https://toddle-connect.vercel.app/graphql',{
             "query": `mutation($first_name: String!, $last_name: String!, $email: String!, $password: String!, $post: String!) {createUser(first_name: $first_name, last_name: $last_name, email: $email, password: $password, post: $post) {user {id first_name last_name email post image}, authToken }}`,
             "variables":{
               "first_name": firstName,

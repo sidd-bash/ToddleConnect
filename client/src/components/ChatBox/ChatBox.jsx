@@ -23,7 +23,7 @@ export default function ChatBox() {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await axios.post(`http://localhost:8000/graphql`,
+        const response = await axios.post(`https://toddle-connect.vercel.app/graphql`,
           {
             "query": `{ messages (user1Id: ${currentUser.id},user2Id: ${selectedContact} ) { id sender_id receiver_id content timestamp } }`
           },

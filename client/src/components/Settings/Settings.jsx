@@ -29,7 +29,7 @@ export default function Settings() {
   },[imageValue])
   const handleSubmit = e=>{
       e.preventDefault();
-      axios.post(`http://localhost:8000/graphql`,
+      axios.post(`https://toddle-connect.vercel.app/graphql`,
  {
     "query": `mutation($first_name: String!, $last_name: String!, $image: String!, $id: ID!) {
       updateUser(first_name: $first_name, last_name: $last_name, image: $image, id: $id) {
