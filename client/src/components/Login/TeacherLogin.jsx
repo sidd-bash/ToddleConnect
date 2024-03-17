@@ -2,11 +2,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import {useNavigate} from "react-router-dom"
 import logo from "../../images/toddleLogo.png"
 import logoWhite from "../../images/toddleLogoWhite.jpg"
-import teacherLogo from "../../images/schoolLogo.jpg"
-import studentLogo from "../../images/studentLogo.jpg"
-import parentLogo from "../../images/parentLogo.jpg"
+
 import landing from "../../images/teacherLogin.png"
-import { GoArrowRight } from "react-icons/go";
+
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import googleLogo from "../../images/googleLogo.jpeg";
 import microsoftLogo from "../../images/microsoftLogo.png";
@@ -14,26 +12,25 @@ import cleverLogo from "../../images/cleverLogo.png";
 import {Row} from "react-bootstrap"
 // import { ChatContext } from '../../context/chatContext'
 import axios from 'axios';
-import useLocalStorage from '../../hooks/useLocalStorage'
 import { AuthContext } from '../../context/authContext'
 // import './Landing.css'
 export default function TeacherLogin() {
     const navigate = useNavigate();
-    const {currentUser,setCurrentUser} = useContext(AuthContext);
+    const {currentUser,setCurrentUser,setAuthToken} = useContext(AuthContext);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     // const [user,setUser] = useState(null);
     const handleSubmit = (e) =>{
       e.preventDefault();
-      axios.post('http://localhost:3000/api/login',{
-            email,
-            password
-        })
+      axios.post('http://localhost:8000/graphql',{
+        "query": `mutation($email: String!, $password: String!) {login(email: $email, password: $password) {user {id first_name last_name email post image}, authToken }}`,
+        "variables":{
+          "email": email,
+          "password": password,
+        }})
         .then(response => {
-            // console.log('Response:', response.data);
-            // response.data.user.image = require('../../images/'+response.data.user.image);
-            setCurrentUser(response.data.user)
-            // window.localStorage.setItem('currentUser', JSON.stringify(response.data.user));
+            setAuthToken(response.data.data.login.authToken)
+            setCurrentUser(response.data.data.login.user)
             navigate('/main');
           }) 
           .catch(error => {

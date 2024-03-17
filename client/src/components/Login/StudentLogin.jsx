@@ -13,25 +13,25 @@ import axios from 'axios';
 // import './Landing.css'
 export default function StudentLogin() {
     const navigate = useNavigate();
-    const {setCurrentUser} = useContext(AuthContext);
+    const {setCurrentUser,setAuthToken} = useContext(AuthContext);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const handleSubmit = (e) =>{
         e.preventDefault();
-        axios.post('http://localhost:3000/api/login',{
-              email,
-              password
-          })
-          .then(response => {
-              // console.log('Response:', response.data);
-              // response.data.user.image = require('../../images/'+response.data.user.image);
-              setCurrentUser(response.data.user)
-              // window.localStorage.setItem('currentUser', JSON.stringify(response.data.user));
-              navigate('/main');
-            }) 
-            .catch(error => {
-              console.error('Error:', error.message);
-            });
+        axios.post('http://localhost:8000/graphql',{
+        "query": `mutation($email: String!, $password: String!) {login(email: $email, password: $password) {user {id first_name last_name email post image}, authToken }}`,
+        "variables":{
+          "email": email,
+          "password": password,
+        }})
+        .then(response => {
+            setAuthToken(response.data.data.login.authToken)
+            setCurrentUser(response.data.data.login.user)
+            navigate('/main');
+          }) 
+          .catch(error => {
+            console.error('Error:', error.message);
+          });
       }
   return (
     

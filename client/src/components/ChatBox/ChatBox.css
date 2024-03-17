@@ -29,3 +29,7 @@
     /* justify-self: flex-end; Aligns children along the horizontal line in a row */
     /* align-self: flex-end; Optional: Centers children along the vertical line in a column */
    }
+
+#aimenu{
+    position: absolute;
+}

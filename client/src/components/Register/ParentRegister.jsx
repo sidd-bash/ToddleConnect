@@ -8,7 +8,7 @@ import axios from 'axios';
 import { AuthContext } from '../../context/authContext'
 export default function ParentRegister() {
     const navigate = useNavigate();
-    const {setCurrentUser,currentUser} = useContext(AuthContext)
+    const {setCurrentUser,currentUser,setAuthToken} = useContext(AuthContext)
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -16,18 +16,20 @@ export default function ParentRegister() {
     const handleSubmit = (e) =>{
         console.log('current user:',currentUser)
         e.preventDefault();
-        axios.post('http://localhost:3000/api/users',{
-            first_name:firstName,
-            last_name:lastName,
-            email,
-            password,
-            post:"Parent"
-        })
+        axios.post('http://localhost:8000/graphql',{
+            "query": `mutation($first_name: String!, $last_name: String!, $email: String!, $password: String!, $post: String!) {createUser(first_name: $first_name, last_name: $last_name, email: $email, password: $password, post: $post) {user {id first_name last_name email post image}, authToken }}`,
+            "variables":{
+              "first_name": firstName,
+              "last_name": lastName,
+              "email": email,
+              "password": password,
+              "post":"Parent"
+            }})
         .then(response => {
-            console.log('Response:', response.data);
-            
-            setCurrentUser(response.data.user)
-            console.log(currentUser)
+            // console.log('Response:', response.data.data.createUser.authToken,response.data.data.createUser.user);
+            setAuthToken(response.data.data.createUser.authToken)
+            setCurrentUser(response.data.data.createUser.user)
+            // console.log(currentUser) 
             navigate('/main');
           }) 
           .catch(error => {

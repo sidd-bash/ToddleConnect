@@ -15,3 +15,7 @@
 #inputBox > *{
     padding: 2vh;
 }
+#aiButton:hover{
+    background-color: aliceblue;
+}
+

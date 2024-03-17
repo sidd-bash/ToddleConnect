@@ -7,18 +7,10 @@ import { ChatContext } from '../../context/chatContext.jsx';
 import { AuthContext } from '../../context/authContext.jsx';
 
 export default function Chats() {
-  const {currentUser} = useContext(AuthContext)
-  const { contacts,isLoading, error, setSelectedContact} = useContext(ChatContext);
- const handleContactSelect = (id) => {
-    setSelectedContact(id);
- };
+  const { currentUser } = useContext(AuthContext)
+  const { contacts, isLoading, error, setSelectedContact } = useContext(ChatContext);
 
- useEffect(()=>{
-  console.log('this is the current user: ',currentUser)
- },[currentUser])
- 
- 
- return (
+  return (
     <div id="chats" className='border border-disabled'>
       <div id="ChatsTab" className="d-flex justify-content-end align-items-center p-4">
         <h3 className='justify-self-start mr-auto fw-bold align-self-center pt-2'>Chats</h3>
@@ -37,12 +29,12 @@ export default function Chats() {
       <div className='d-flex flex-column mt-2'>
         {isLoading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
-        {contacts && contacts.length > 0 ? contacts.map((contact,index) => (
-          <button style={{ border: "none", background: "none" }} onClick={() => handleContactSelect(contact.id)} key={contact.id}>
+        {contacts && contacts.length > 0 ? contacts.map((contact, index) => (
+          <button style={{ border: "none", background: "none" }} onClick={() => setSelectedContact(contact.id)} key={contact.id}>
             {contact.id !== currentUser.id && <Contact contact={contact} />}
           </button>
         )) : <p>No contacts found.</p>}
       </div>
     </div>
- );
+  );
 }

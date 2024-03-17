@@ -6,9 +6,9 @@ import './Settings.css';
 import { FiArrowLeftCircle } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 export default function Settings() {
-  const {currentUser,setCurrentUser} = useContext(AuthContext)
-  const [first_name,setFirstName] = useState(currentUser.first_name)
-  const [last_name,setLastName] = useState(currentUser.last_name)
+  const {currentUser,setCurrentUser,authToken} = useContext(AuthContext)
+  const [firstName,setFirstName] = useState(currentUser.first_name)
+  const [lastName,setLastName] = useState(currentUser.last_name)
   const [image,setImage] = useState(currentUser.image)
   const [imageValue,setImageValue] = useState(null);
   const navigate = useNavigate();
@@ -29,14 +29,36 @@ export default function Settings() {
   }
   const handleSubmit = e=>{
       e.preventDefault();
-      axios.put(`http://localhost:3000/api/users/${currentUser.id}`,{
-
-        first_name,
-        last_name,
+      axios.post(`http://localhost:8000/graphql`,
+ {
+    "query": `mutation($first_name: String!, $last_name: String!, $image: String!, $id: ID!) {
+      updateUser(first_name: $first_name, last_name: $last_name, image: $image, id: $id) {
+        id
+        first_name
+        last_name
+        email
+        post
         image
-      })
-      .then(res=>console.log(res))
-      .then(setCurrentUser({...currentUser,first_name,last_name,image}))
+      }
+    }`,
+    "variables": {
+      "id": currentUser.id,
+      "first_name": firstName,
+      "last_name": lastName,
+      "image": image
+    }
+ },
+ {
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+ }
+)
+      .then(res=>console.log(res.data.data.updateUser))
+      .then(
+        setCurrentUser({...currentUser,first_name:firstName,last_name:lastName,image}),
+        navigate('/main')
+        )
       .catch(err=>console.log('server error:',err))
   }
   useEffect(
@@ -54,8 +76,8 @@ export default function Settings() {
     <span className="edit-photo-text">Edit Photo</span>
   </label>
   <input type="file" id="profile-picture" accept="image/*" onChange={e => setImageValue(e.target.files[0])} style={{ display: 'none' }} />
-  <input  className='p-2 col-6 rounded' value={first_name} onChange={e => setFirstName(e.target.value)} placeholder='first name' />
-  <input  className='p-2 col-6 rounded' value={last_name} onChange={e => setLastName(e.target.value)} placeholder='last name' />
+  <input  className='p-2 col-6 rounded' value={firstName} onChange={e => setFirstName(e.target.value)} placeholder='first name' />
+  <input  className='p-2 col-6 rounded' value={lastName} onChange={e => setLastName(e.target.value)} placeholder='last name' />
   <Button className="button btn-danger col-3" type='submit'>Apply Changes</Button>
 </form>
 

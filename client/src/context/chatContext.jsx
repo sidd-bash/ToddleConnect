@@ -14,7 +14,7 @@ const ChatContext = createContext({
 
 
 const ChatProvider = ({ children }) => {
-  const { currentUser } = useContext(AuthContext)
+  const { currentUser,authToken } = useContext(AuthContext)
   const [selectedContact, setSelectedContact] = useState(null);
   const [contacts, setContacts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,16 +24,22 @@ const ChatProvider = ({ children }) => {
 
 
   useEffect(() => {
-    const fetchContacts = async () => {
+    const fetchContacts = () => {
       setIsLoading(true);
       setError(null);
 
       try {
-        const response = await axios.get(`http://localhost:3000/api/users/${currentUser.id}/contacts`);
-        console.log(response.data);
-        const data = response.data;
-
-        setContacts(data);
+        axios.post(`http://localhost:8000/graphql`,
+          {
+            "query": `{ contacts (userId: ${currentUser.id} ) { id first_name last_name email post image } }`,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`
+            }
+          } 
+        )
+        .then(res=>setContacts(res.data.data.contacts));
       } catch (error) {
         console.error('Error fetching contacts:', error);
         setError(error.message);

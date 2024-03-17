@@ -3,40 +3,61 @@ import "./SearchBar.css";
 import { Search } from 'react-bootstrap-icons'
 import axios from 'axios';
 import { ChatContext } from '../../context/chatContext';
+import { AuthContext } from '../../context/authContext';
 export default function SearchBar() {
-  const {selectedContact,setSelectedContact,setUsers} =useContext(ChatContext)
+  const {contacts, setContacts, selectedContact,setSelectedContact,setUsers} =useContext(ChatContext)
   const [search, setSearch] = useState('')
   const [results,setResults] = useState([])
   const [isActive,setIsActive] = useState(false)
+  const {authToken} = useContext(AuthContext)
+  const [isSelecting, setIsSelecting] = useState(false)
+
   const handleFocus = ()=>{
     setIsActive(true)
   }
+  const handleBlur = () => {
+    if (!isSelecting) {
+       setIsActive(false);
+    }
+    setIsSelecting(false);
+   };
+  
   useEffect(()=>{
-    axios.get(`http://localhost:3000/api/users/search/${search}`)
+    axios.post(`http://localhost:8000/graphql`,
+    {
+      "query": `{ users(keyword: "${search}") { id first_name last_name email post image } }`
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${authToken}`
+      }
+    })
     .then(
       response=>{
-        console.log(response.data)
-        setResults(response.data)
-        setUsers(response.data)
+        console.log(response.data.data.users)
+        setResults(response.data.data.users)
+        setUsers(response.data.data.users)
       }
     )
   },[search])
   useEffect(()=>{ 
     console.log('Selected Contact',selectedContact)
   },[selectedContact])
-  const handleContactSelect = (result)=>{
-    //  console.log(result)
-    setSelectedContact(result.id)
-    setIsActive(false)
-  }
+  const handleContactSelect = (result) => {
+    setIsSelecting(true);
+    setSelectedContact(result.id);
+    if (!contacts.some(contact => contact.id === result.id)) setContacts([...contacts, result]);
+    setIsActive(false);
+   };
+   
   return (
     <div className='d-flex justify-content-center SearchBar align-items-center'>
       <div className='d-flex align-items-center border border-disabled rounded w-50 bg-white p-1 Input'>
         <Search/>
-        <input type="text" placeholder='Search' value={search} onChange={e=>setSearch(e.target.value)} onFocus={handleFocus} onBlur={handleFocus}/>
+        <input style={{ outline: 'none' }} type="text" placeholder='Search' value={search} onChange={e=>setSearch(e.target.value)} onFocus={handleFocus} onBlur={handleBlur}/>
         <div className='d-flex flex-column rounded mt-5 w-100 bg-light align-items-start' style={{position:'absolute', top:'1vh'}}>
         {isActive && results.map(result=>(
-          <button key={result.id} className='bg-white border border-disabled col-5 justify-content-start d-flex' onClick={()=>handleContactSelect(result)}>
+          <button key={result.id} className='bg-white border border-disabled col-5 justify-content-start d-flex' onMouseDown={() => setIsSelecting(true)} onClick={() => handleContactSelect(result)}>
             <div className='p-2 d-flex flex-column align-items-start'>
               <div>{result.first_name + " " + result.last_name}</div>
               <div className='text-secondary'>{result.post}</div>
