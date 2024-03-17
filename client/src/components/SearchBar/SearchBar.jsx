@@ -11,7 +11,6 @@ export default function SearchBar() {
   const [isActive,setIsActive] = useState(false)
   const {authToken} = useContext(AuthContext)
   const [isSelecting, setIsSelecting] = useState(false)
-
   const handleFocus = ()=>{
     setIsActive(true)
   }
@@ -39,7 +38,7 @@ export default function SearchBar() {
         setUsers(response.data.data.users)
       }
     )
-  },[search,authToken,setUsers])
+  },[search,authToken])
   const handleContactSelect = (result) => {
     setIsSelecting(true);
     setSelectedContact(result.id);
