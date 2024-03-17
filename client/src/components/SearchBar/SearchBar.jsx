@@ -38,6 +38,7 @@ export default function SearchBar() {
         setUsers(response.data.data.users)
       }
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[search,authToken])
   const handleContactSelect = (result) => {
     setIsSelecting(true);
