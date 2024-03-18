@@ -119,7 +119,7 @@ const resolvers = {
         const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '3h' });
         return { user, authToken: token };
       } catch (error) {
-        throw new Error('Error logging in');
+        throw new Error('Error logging in',error);
       }
     },
     updateUser: async (_, { id, first_name, last_name, image }, context) => {
