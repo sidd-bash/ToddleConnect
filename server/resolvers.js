@@ -7,7 +7,7 @@ dotenv.config()
 
 
 const config = {
-  connectionString: process.env.POSTGRES_URL
+  connectionString: "postgres://default:Qo32EJGwdSVI@ep-muddy-block-a48j712o-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
 }
 const pool = new Pool(config)
 
