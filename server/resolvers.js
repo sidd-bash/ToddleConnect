@@ -32,7 +32,7 @@ const resolvers = {
         throw new Error("Unauthorized access. Please provide a valid authentication token.");
       }
       try {
-        const decodedToken = verifyJwtToken(context.authToken, process.env.JWT_SECRET);
+        const decodedToken = verifyJwtToken(context.authToken, 'SECRET KEY');
         if (!decodedToken || !decodedToken.email) {
           throw new Error("Invalid authentication token.");
         }
@@ -47,7 +47,7 @@ const resolvers = {
         throw new Error("Unauthorized access. Please provide a valid authentication token.");
       }
       try {
-        const decodedToken = verifyJwtToken(context.authToken, process.env.JWT_SECRET);
+        const decodedToken = verifyJwtToken(context.authToken, 'SECRET KEY');
         if (!decodedToken || !decodedToken.email) {
           throw new Error("Invalid authentication token.");
         }
@@ -66,7 +66,7 @@ const resolvers = {
         throw new Error("Unauthorized access. Please provide a valid authentication token.");
       }
       try {
-        const decodedToken = verifyJwtToken(context.authToken, process.env.JWT_SECRET);
+        const decodedToken = verifyJwtToken(context.authToken, 'SECRET KEY');
         if (!decodedToken || !decodedToken.email) {
           throw new Error("Invalid authentication token.");
         }
@@ -93,7 +93,7 @@ const resolvers = {
         );
 
         const user = result.rows[0];
-        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '3h' });
+        const token = jwt.sign({ email: user.email }, 'SECRET KEY', { expiresIn: '3h' });
         return { user, authToken: token };
       } catch (error) {
         console.error('Error creating user:', error);
@@ -116,7 +116,7 @@ const resolvers = {
         }
 
         const user = result.rows[0];
-        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '3h' });
+        const token = jwt.sign({ email: user.email }, 'SECRET KEY', { expiresIn: '3h' });
         return { user, authToken: token };
       } catch (error) {
         throw new Error('Error logging in',error);
@@ -127,7 +127,7 @@ const resolvers = {
         throw new Error("Unauthorized access. Please provide a valid authentication token.");
       }
       try {
-        const decodedToken = verifyJwtToken(context.authToken, process.env.JWT_SECRET);
+        const decodedToken = verifyJwtToken(context.authToken, 'SECRET KEY');
         if (!decodedToken || !decodedToken.email) {
           throw new Error("Invalid authentication token.");
         }
@@ -151,7 +151,7 @@ const resolvers = {
         throw new Error("Unauthorized access. Please provide a valid authentication token.");
       }
       try {
-        const decodedToken = verifyJwtToken(context.authToken, process.env.JWT_SECRET);
+        const decodedToken = verifyJwtToken(context.authToken, 'SECRET KEY');
         if (!decodedToken || !decodedToken.email) {
           throw new Error("Invalid authentication token.");
         }
