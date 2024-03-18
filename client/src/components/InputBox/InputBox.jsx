@@ -16,7 +16,12 @@ export default function InputBox({user, messages, setMessages}) {
     const [newMsg, setNewMsg] = useState('');
     const {currentUser,authToken} = useContext(AuthContext)
     const {selectedContact} = useContext(ChatContext);
-    const socket = useMemo(()=>io("https://toddle-connect.vercel.app"),[])
+    const socket = useMemo(() => {
+      return io("https://toddle-connect.vercel.app", {
+         transports: ['websocket'],
+         secure: true
+      });
+     }, []);
     const [argument,setArgument] = useState(0)
     const [showMenu,setShowMenu] = useState(false)
     const [language,setLanguage] = useState('English')
