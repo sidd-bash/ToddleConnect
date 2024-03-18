@@ -22,7 +22,7 @@ export default function TeacherLogin() {
     // const [user,setUser] = useState(null);
     const handleSubmit = (e) =>{
       e.preventDefault();
-      axios.post('https://toddle-connect.vercel.app:8000/graphql',{
+      axios.post('https://toddle-connect.vercel.app/graphql',{
         "query": `mutation($email: String!, $password: String!) {login(email: $email, password: $password) {user {id first_name last_name email post image}, authToken }}`,
         "variables":{
           "email": email,
