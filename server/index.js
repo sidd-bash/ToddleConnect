@@ -23,7 +23,7 @@ async function startServer() {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true })); // Parses URL-encoded data
     
-    app.use(cors({ origin: process.env.clientURL }));
+    app.use(cors({ origin: '*' }));
     // app.use('/socket.io');
 
     app.use("/graphql", cors(), express.json(), expressMiddleware(server, {
@@ -45,7 +45,7 @@ async function startServer() {
 
 const io = new Server(httpServer,{
   cors:{
-    origin:process.env.clientURL,
+    origin:'*',
     methods: ["GET", "POST"]
   }
 })
