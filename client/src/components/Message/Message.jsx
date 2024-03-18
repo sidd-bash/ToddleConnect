@@ -1,6 +1,7 @@
 import React,{useContext, useEffect} from 'react'
 // import { ChatContext } from '../../context/chatContext';
 import { AuthContext } from '../../context/authContext';
+import './Message.css'
 export default function Message({message, details}) {
     const {currentUser} = useContext(AuthContext)
     useEffect(()=>{
