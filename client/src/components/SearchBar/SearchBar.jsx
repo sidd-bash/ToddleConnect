@@ -13,7 +13,7 @@ export default function SearchBar() {
   const [isActive,setIsActive] = useState(false)
   const {authToken} = useContext(AuthContext)
   const [isSelecting, setIsSelecting] = useState(false)
-  const {windowState} = useContext(WindowContext)
+  const {windowState,setWindowState} = useContext(WindowContext)
   const handleFocus = ()=>{
     setIsActive(true)
   }
@@ -46,6 +46,7 @@ export default function SearchBar() {
   const handleContactSelect = (result) => {
     setIsSelecting(true);
     setSelectedContact(result.id);
+    setWindowState(true)
     if (!contacts.some(contact => contact.id === result.id)) setContacts([...contacts, result]);
     setIsActive(false);
    };
