@@ -4,6 +4,8 @@ import { Search } from 'react-bootstrap-icons'
 import axios from 'axios';
 import { ChatContext } from '../../context/chatContext';
 import { AuthContext } from '../../context/authContext';
+import NavBar from '../NavBar/NavBar';
+import { WindowContext } from '../../context/windowContext';
 export default function SearchBar() {
   const {contacts, setContacts, setSelectedContact,setUsers} =useContext(ChatContext)
   const [search, setSearch] = useState('')
@@ -11,6 +13,7 @@ export default function SearchBar() {
   const [isActive,setIsActive] = useState(false)
   const {authToken} = useContext(AuthContext)
   const [isSelecting, setIsSelecting] = useState(false)
+  const {windowState} = useContext(WindowContext)
   const handleFocus = ()=>{
     setIsActive(true)
   }
@@ -48,7 +51,11 @@ export default function SearchBar() {
    };
    
   return (
-    <div className='d-flex justify-content-center SearchBar align-items-center'>
+    <div className={`d-flex justify-content-center SearchBar align-items-center col-12 ${windowState ? 'd-none' : ''}`}>
+      <div id='navBarTwo' >
+
+      <NavBar/>
+      </div>
       <div className='d-flex align-items-center border border-disabled rounded w-50 bg-white p-1 Input'>
         <Search/>
         <input style={{ outline: 'none' }} type="text" placeholder='Search' value={search} onChange={e=>setSearch(e.target.value)} onFocus={handleFocus} onBlur={handleBlur}/>

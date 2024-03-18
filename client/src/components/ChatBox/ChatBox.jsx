@@ -6,18 +6,29 @@ import Message from '../Message/Message';
 import axios from 'axios';
 import { AuthContext } from '../../context/authContext';
 import toddleWallpaper from "../../images/toddleWallpaper.png"
+import { FiArrowLeftCircle } from 'react-icons/fi';
+import { WindowContext } from '../../context/windowContext';
 
 export default function ChatBox() {
   const { currentUser, authToken } = useContext(AuthContext)
   const { selectedContact, contacts } = useContext(ChatContext);
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(); 
   const [error, setError] = useState()
   const chatBoxRef = useRef(null);
-
+  const [isChatBoxVisible, setIsChatBoxVisible] = useState(false); // State to control chatbox visibility
+  const {windowState,setWindowState} = useContext(WindowContext)
   const selectedContactDetails = contacts.find(
-    (contact) => contact.id === selectedContact
+     (contact) => contact.id === selectedContact
   );
-  const [messages, setMessages] = useState([])
+  useEffect(()=>{
+    if(windowState) setIsChatBoxVisible(true);
+  },[windowState])
+  const [messages, setMessages] = useState([]);
+ 
+  const handleChatNav = () => {
+     setIsChatBoxVisible(!isChatBoxVisible); // Toggle chatbox visibility
+     setWindowState(false)
+  };
   useEffect(() => {
     const fetchMessages = async () => {
       setIsLoading(true);
@@ -82,7 +93,7 @@ export default function ChatBox() {
     }
   }, [messages])
   return (
-    <div id="chatBox" className="d-flex flex-column justify-content-start">
+    <div id="chatBox" className={`d-flex flex-column justify-content-start ${isChatBoxVisible ? 'show' : ''}`}>
       {selectedContactDetails ? (
         <>
           <div id="chatBoxTab" class="d-flex align-items-center p-1 border border-disabled">
@@ -91,6 +102,7 @@ export default function ChatBox() {
             </div>
             <h3 className='fw-bold mx-2 align-self-end'>{selectedContactDetails.first_name + " " + selectedContactDetails.last_name}</h3>
           </div>
+          <FiArrowLeftCircle className='fs-3 d-lg-none' id='backButton' onClick={handleChatNav}/>
           <div id='chatBoxMessages' ref={chatBoxRef}>
             {!isLoading && !error && messages.map((message) => (
               <Message message={message} key={message.id} details={selectedContactDetails} userDetails={currentUser} />

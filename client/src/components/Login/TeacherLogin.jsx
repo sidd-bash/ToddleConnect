@@ -43,10 +43,11 @@ export default function TeacherLogin() {
   return (
     
     <div className='d-flex justify-content-center col-12'>
-        <img src={logoWhite} alt="" width={170} className='m-5 d-sm-none d-xs-none d-md-none d-lg-block' style={{position:"absolute", left:"10px"}}/>
-    <div className='col-lg-6 d-xs-none d-sm-none d-md-none d-lg-block'>
-        <img src={landing} alt="" style={{height:"100vh"}}/>
-    </div>
+        <img src={logoWhite} alt="" width={150} className='m-5 d-none d-md-block d-lg-block logo-white-small' style={{position:"absolute", left:"10px"}}/>
+        <div className='col-lg-6 d-xs-none d-sm-none d-md-none d-lg-block'>
+    <img src={landing} alt="" style={{height:"100vh"}} className='d-none d-md-block'/>
+</div>
+
     
     <div className='d-flex flex-column col-lg-6 col-12 justify-content-center'>
       <div className='mt-3 pt-5'>

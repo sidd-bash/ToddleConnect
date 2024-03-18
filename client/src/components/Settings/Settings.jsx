@@ -69,7 +69,7 @@ export default function Settings() {
     
     <div className=' d-flex align-items-center justify-content-center col-12'>
 
-<form onSubmit={handleSubmit} className='d-flex gap-4 mt-5 flex-column align-items-center rounded col-6 border border-disabled bg-light p-3'>
+<form onSubmit={handleSubmit} className='d-flex gap-4 mt-5 flex-column align-items-center rounded col-11 border border-disabled bg-light p-3'>
   <FiArrowLeftCircle className='fs-3' id='backButton' onClick={()=>navigate('/main')}/>
   <label htmlFor="profile-picture" className="edit-photo">
     <img src={image} className="edit-photo-image rounded-circle profile-picture" alt="Profile" width={150} />
@@ -78,7 +78,7 @@ export default function Settings() {
   <input type="file" id="profile-picture" accept="image/*" onChange={e => setImageValue(e.target.files[0])} style={{ display: 'none' }} />
   <input  className='p-2 col-6 rounded' value={firstName} onChange={e => setFirstName(e.target.value)} placeholder='first name' />
   <input  className='p-2 col-6 rounded' value={lastName} onChange={e => setLastName(e.target.value)} placeholder='last name' />
-  <Button className="button btn-danger col-3" type='submit'>Apply Changes</Button>
+  <Button className="button btn-danger col-3 " type='submit'>Apply Changes</Button>
 </form>
 
     </div>

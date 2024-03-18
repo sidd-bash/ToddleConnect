@@ -1,29 +1,59 @@
-#add{
+#add {
     background: #09818d;
-    
 }
-/* #filter{
-    border
-} */
-#ChatsTab > div{
+
+#ChatsTab > div {
     padding: 5px;
     width: 2vw;
     height: 2vw;
     display: grid;
     place-items: center;
     border-radius: 5px;
-    
 }
-#ChatsTab{
+
+#ChatsTab {
     height: 6vh;
 }
-#chats{
+
+#chats {
     height: 93vh;
     width: 30%;
 }
-#ChatsTab > h3{
+
+#ChatsTab > h3 {
     margin-right: auto;
 }
 
+/* Media query for tablets and mobile devices */
+@media (max-width: 768px) {
+    #chats {
+        width: 100%; /* Make the chats container full width on smaller screens */
+    }
 
+    #ChatsTab > div {
+        width: 4vw; /* Adjust the size of the icons for smaller screens */
+        height: 4vw;
+    }
 
+    #ChatsTab {
+        height: auto; /* Adjust the height to accommodate content */
+    }
+}
+
+/* Existing styles */
+#filter, #add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2vw;
+    height: 2vw;
+    border-radius: 5px;
+}
+
+/* Responsive styles for icons */
+@media (max-width: 768px) {
+    #filter, #add {
+        width: 4vw; /* Adjust the size of the icons for smaller screens */
+        height: 4vw;
+    }
+}

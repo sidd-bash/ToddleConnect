@@ -10,3 +10,17 @@ input{
     height:3rem;
 
 }
+#navBarTwo{
+    display: none;
+    margin-right: auto;
+    align-self: center;
+}
+@media (max-width:480px){
+
+    #navBarTwo{
+        position: absolute;
+        display: block;
+        left:1vw;
+        top:-45px;
+    }
+}

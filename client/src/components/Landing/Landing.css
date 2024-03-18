@@ -1,0 +1,13 @@
+/* Landing.css */
+@media (max-width: 768px) {
+    .logo-white-small {
+       width: 100px; /* Adjust the width for smaller screens */
+    }
+   }
+@media (max-width: 768px) {
+    .responsive-button {
+       padding: 10px 20px;
+       font-size: 14px;
+    }
+   }
+      

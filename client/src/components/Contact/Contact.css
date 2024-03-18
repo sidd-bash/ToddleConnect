@@ -1,8 +1,23 @@
-#image img{
+#image img {
     width: 3vw;
     height: 3vw;
     object-fit: cover;
 }
+
+@media screen and (max-width: 768px) {
+    #image img {
+        width: 5vw; /* Adjust the size for smaller screens */
+        height: 5vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #image img {
+        width: 10vw; /* Further adjust the size for even smaller screens */
+        height: 10vw;
+    }
+}
+
 
 #contact:hover{
     background: #ddd;
@@ -10,3 +25,4 @@
 #time{
     margin-left: auto;
 }
+

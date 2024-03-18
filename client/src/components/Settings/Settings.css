@@ -33,3 +33,36 @@
     top:10%;
     left:30%
   }
+  @media (max-width: 768px) {
+    .edit-photo-image {
+        width: 50vh; /* Adjust the size for smaller screens */
+        height: 50vh;
+    }
+
+    .edit-photo-text {
+        top: 30%; /* Adjust position for smaller screens */
+        left: 50%;
+    }
+
+    #backButton {
+        top: 15%; /* Adjust position for smaller screens */
+        left: 40%;
+    }
+}
+
+@media (max-width: 480px) {
+    .edit-photo-image {
+        width: 40vh; /* Further adjust the size for even smaller screens */
+        height: 40vh;
+    }
+
+    .edit-photo-text {
+        top: 40%; /* Further adjust position for even smaller screens */
+        left: 50%;
+    }
+
+    #backButton {
+        top: 10%; /* Further adjust position for even smaller screens */
+        left: 10%;
+    }
+}

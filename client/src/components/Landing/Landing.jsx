@@ -14,16 +14,17 @@ export default function Landing() {
   return (
     
     <div className='d-flex justify-content-center col-12'>
-        <img src={logoWhite} alt="" width={150} className='m-5 d-sm-none d-xs-none d-md-none d-lg-block' style={{position:"absolute", left:"10px"}}/>
-    <div className='col-lg-6 d-xs-none d-sm-none d-md-none d-lg-block'>
-        <img src={landing} alt="" style={{height:"100vh"}}/>
-    </div>
+        <img src={logoWhite} alt="" width={150} className='m-5 d-none d-md-block d-lg-block logo-white-small' style={{position:"absolute", left:"10px"}}/>
+        <div className='col-lg-6 d-xs-none d-sm-none d-md-none d-lg-block'>
+    <img src={landing} alt="" style={{height:"100vh"}} className='d-none d-md-block'/>
+</div>
+
     
     <div className='d-flex flex-column col-lg-6 col-12 justify-content-center'>
       <img src={logo} alt="" width={150} className='m-5 d-lg-none' />
       <h2 className='fw-bold mx-2 mt-lg-5 pt-lg-5'>Welcome to Toddle!</h2>
       <p className='text-secondary mx-2'>Choose an account type to proceed</p>
-      <button className='d-flex align-items-center rounded border border-disabled mt-3 mx-2 w-75 p-2' style={{background:"none"}} onClick={()=>navigate('/teacherLogin')}>
+      <button className='d-flex align-items-center rounded border border-disabled mt-3 mx-2 w-75 p-2 responsive-button' style={{background:"none"}} onClick={()=>navigate('/teacherLogin')}>
         <img src={teacherLogo} alt="" width={90} />
         <div className='d-flex flex-column justify-content-center w-75 align-items-start'>
             <div className='fw-bold'>Teacher account</div>
@@ -31,7 +32,7 @@ export default function Landing() {
         </div>
         <GoArrowRight className='fs-4 text-secondary mx-4 justify-self-end'/>
       </button>
-      <button className='d-flex align-items-center rounded border border-disabled mt-3 mx-2 w-75 p-2' style={{background:"none"}} onClick={()=>navigate('/studentLogin')}>
+      <button className='d-flex align-items-center rounded border border-disabled mt-3 mx-2 w-75 p-2 responsive-button' style={{background:"none"}} onClick={()=>navigate('/studentLogin')}>
         <img src={studentLogo} alt="" width={90} />
         <div className='d-flex flex-column justify-content-center w-75 align-items-start'>
             <div className='fw-bold'>Student account</div>
@@ -39,7 +40,7 @@ export default function Landing() {
         </div>
         <GoArrowRight className='fs-4 text-secondary mx-4 justify-self-end'/>
       </button>
-      <button className='d-flex align-items-center rounded border border-disabled mt-3 mx-2 w-75 p-2' style={{background:"none"}} onClick={()=>navigate('/parentLogin')}>
+      <button className='d-flex align-items-center rounded border border-disabled mt-3 mx-2 w-75 p-2 responsive-button' style={{background:"none"}} onClick={()=>navigate('/parentLogin')}>
         <img src={parentLogo} alt="" width={90} />
         <div className='d-flex flex-column justify-content-center w-75 align-items-start'>
             <div className='fw-bold'>Parent account</div>

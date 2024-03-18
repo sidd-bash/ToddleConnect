@@ -1,35 +1,72 @@
-#image img{
+#image img {
     width: 3vw;
     height: 3vw;
     object-fit: cover;
 }
-#chatBox{
-    width: 70%;
+
+#chatBox {
+    width: 100%; /* Full width initially */
     height: 90vh;
     overflow-y: hidden;
+    transition: width 0.5s ease-in-out; /* Smooth transition for width change */
 }
-#chatBoxMessages{
+
+#chatBox.rolledOut {
+    width: 70%; /* Partial width when rolled out */
+}
+
+#chatBoxMessages {
     overflow-y: scroll;
     height: 70vh;
     scrollbar-width: none;
 }
-/*
-#chatBoxTab{
-    background:violet
-} */
-#inputBox{
-    margin-top: auto;
-    /* background: red; */
-    
-}
-#input {
-    /* position: absolute; */
-    /* bottom: 5vh; */
-    /* display: flex; */
-    /* justify-self: flex-end; Aligns children along the horizontal line in a row */
-    /* align-self: flex-end; Optional: Centers children along the vertical line in a column */
-   }
 
-#aimenu{
-    position: absolute;
+/* Responsive styles */
+@media (max-width: 768px) {
+    #chatBox {
+        width: 90%; /* Adjust the width for smaller screens */
+    }
+
+    #chatBoxMessages {
+        height: 70vh; /* Adjust the height for smaller screens */
+    }
+
+    #image img {
+        width: 5vw; /* Adjust the size of the image for smaller screens */
+        height: 5vw;
+    }
+}
+
+@media (max-width: 480px) {
+    #chatBox {
+        width: 95%; /* Further adjust the width for even smaller screens */
+    }
+
+    #chatBoxMessages {
+        height: 70vh; /* Further adjust the height for even smaller screens */
+    }
+
+    #image img {
+        width: 7vw; /* Further adjust the size of the image for even smaller screens */
+        height: 7vw;
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+    #chatBox {
+        width: 100%; /* Make the chatbox cover the entire width on mobile */
+        position: fixed; /* Fix the position to cover the entire screen */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000; /* Ensure it's above other content */
+        transition: transform 0.3s ease-in-out; /* Smooth transition for rolling out */
+        transform: translateX(100%); /* Initially hidden */
+    }
+
+    #chatBox.show {
+        transform: translateX(0); /* Show the chatbox */
+    }
 }
