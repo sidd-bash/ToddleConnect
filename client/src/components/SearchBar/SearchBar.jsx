@@ -59,7 +59,7 @@ export default function SearchBar() {
       </div>
       <div className='d-flex align-items-center border border-disabled rounded w-50 bg-white p-1 Input'>
         <Search/>
-        <input style={{ outline: 'none' }} type="text" placeholder='Search' value={search} onChange={e=>setSearch(e.target.value)} onFocus={handleFocus} onBlur={handleBlur}/>
+        <input className='w-50' style={{ outline: 'none' }} type="text" placeholder='Search' value={search} onChange={e=>setSearch(e.target.value)} onFocus={handleFocus} onBlur={handleBlur}/>
         <div className='d-flex flex-column rounded mt-5 w-100 bg-light align-items-start' style={{position:'absolute', top:'1vh'}}>
         {isActive && results.map(result=>(
           <button key={result.id} className='bg-white border border-disabled col-5 justify-content-start d-flex' onMouseDown={() => setIsSelecting(true)} onClick={() => handleContactSelect(result)}>
