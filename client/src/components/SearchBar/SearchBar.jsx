@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useContext} from 'react'
+import React,{useState,useEffect,useContext,useCallback} from 'react'
 import "./SearchBar.css";
 import { Search } from 'react-bootstrap-icons'
 import axios from 'axios';
@@ -23,26 +23,37 @@ export default function SearchBar() {
     }
     setIsSelecting(false);
    };
-  
-  useEffect(()=>{
-    axios.post(`https://toddle-connect.vercel.app/graphql`,
+   const debounce = (func, delay) => { // Debounce function
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), delay);
+    };
+  };
+
+const debouncedSearch = useCallback(debounce((searchQuery) => {
+  axios.post(`https://toddle-connect.vercel.app/graphql`,
     {
-      "query": `{ users(keyword: "${search}") { id first_name last_name email post image } }`
+      query: `{ users(keyword: "${searchQuery}") { id first_name last_name email post image } }`
     },
     {
       headers: {
         Authorization: `Bearer ${authToken}`
       }
     })
-    .then(
-      response=>{
-        console.log(response.data.data.users)
-        setResults(response.data.data.users)
-        setUsers(response.data.data.users)
-      }
-    )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[search,authToken])
+    .then(response => {
+      setResults(response.data.data.users);
+      setUsers(response.data.data.users); // Assuming you need users state as well
+    })
+    .catch(error => console.error(error));
+}, 500), []); // Delay of 500 milliseconds (adjust as needed)
+
+useEffect(() => {
+  debouncedSearch(search);
+}, [debouncedSearch, search]); // Only re-run when search or debouncedSearch change
+
+// ... rest of your component
+
   const handleContactSelect = (result) => {
     setIsSelecting(true);
     setSelectedContact(result.id);
